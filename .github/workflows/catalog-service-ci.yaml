@@ -4,6 +4,11 @@ on:
     paths:
       - 'catalog-service/**'
 
+env:
+  REGISTRY: ghcr.io
+  IMAGE_NAME: polabookshop/catalog-service
+  VERSION: latest
+
 jobs:
   build:
     name: Build and Test
@@ -20,6 +25,11 @@ jobs:
           distribution: temurin
           java-version: 17
           cache: gradle
+      - name: Build, unit tests and integration tests
+        run: |
+          cd catalog-service
+          chmod +x gradlew
+          ./gradlew build
       - name: Code vulnerability scanning
         uses: anchore/scan-action@v3
         id: scan
@@ -33,11 +43,48 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
-      - name: Build, unit tests and integration tests
+
+  package:
+    name: Package and publish
+    if: ${{ github.ref == 'refs/heads/main'}}
+    needs: [build]
+    runs-on: ubuntu-22.04
+    permissions:
+      contents: read
+      packages: write
+      security-events: write
+    steps:
+      - name: Checkout source code
+        uses: actions/checkout@v4
+      - name: Setup JDK
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Build container image
         run: |
           cd catalog-service
           chmod +x gradlew
-          ./gradlew build
-
-
-
+          ./gradlew bootBuildImage \
+           --imageName ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+      - name: OCI image vulnerability scanning
+        uses: anchore/scan-action@v3
+        id: scan
+        with:
+          image: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
+          fail-build: false
+          severity-cutoff: high
+      - name: Upload vulnerability report
+        uses: github/codeql-action/upload-sarif@v3
+        if: success() || failure()
+        with:
+          sarif_file: ${{ steps.scan.outputs.sarif }}
+      - name: Log into container registry
+        uses: docker/login-action@v3
+        with:
+          registry: ${{ env.REGISTRY }}
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      - name: Publish container image
+        run: docker push ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}:${{ env.VERSION }}
