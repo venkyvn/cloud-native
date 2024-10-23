@@ -1,5 +1,8 @@
-name: Commit stage
-on: push
+name: Catalog service commit stage
+on:
+  push:
+    paths:
+      - 'catalog-service/**'
 
 jobs:
   build:
