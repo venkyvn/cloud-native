@@ -43,7 +43,6 @@ jobs:
         if: success() || failure()
         with:
           sarif_file: ${{ steps.scan.outputs.sarif }}
-
   package:
     name: Package and publish
     if: ${{ github.ref == 'refs/heads/main'}}
