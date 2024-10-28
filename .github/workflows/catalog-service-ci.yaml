@@ -45,7 +45,7 @@ jobs:
           sarif_file: ${{ steps.scan.outputs.sarif }}
   package:
     name: Package and publish
-    if: ${{ github.ref == 'refs/heads/main'}}
+    if: ${{ github.ref == 'refs/heads/master'}}
     needs: [build]
     runs-on: ubuntu-22.04
     permissions:
