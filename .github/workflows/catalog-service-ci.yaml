@@ -6,7 +6,7 @@ on:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: polabookshop/catalog-service
+  IMAGE_NAME: venkyvn/catalog-service
   VERSION: latest
 
 jobs:
