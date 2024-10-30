@@ -19,3 +19,11 @@ spring:
           timeout: 5
           clone-on-start: true
           force-pull: true
+  r2dbc:
+    username: user
+    password: password
+    url: r2dbc:postgresql://localhost:5432/polardb_order
+    pool:
+      max-create-connection-time: 2s
+      initial-size: 5
+      max-size: 10
