@@ -5,28 +5,22 @@ on:
     paths:
       - 'order-service/**'
 
-env:
-  SERVICE: order-service
-  REGISTRY: ghcr.io
-  IMAGE_NAME: venkyvn/order-service
-  VERSION: latest
-
 jobs:
   build_and_test:
     name: Build and Test
     uses: ./.github/workflows/common-ci.yaml
     with:
-      service_dir: ${{ env.SERVICE }}
-      registry: ${{ env.REGISTRY }}
-      image_name: ${{ env.IMAGE_NAME }}
-      version: ${{ env.VERSION }}
+      service_dir: 'order-service'
+      registry: 'ghcr.io'
+      image_name: 'venkyvn/order-service'
+      version: 'latest'
 
   package_and_publish:
     if: ${{ github.ref == 'refs/heads/master'}}
     needs: [build_and_test]
     uses: ./.github/workflows/common-ci.yaml
     with:
-      service_dir: ${{ env.SERVICE }}
-      registry: ${{ env.REGISTRY }}
-      image_name: ${{ env.IMAGE_NAME }}
-      version: ${{ env.VERSION }}
+      service_dir: 'order-service'
+      registry: 'ghcr.io'
+      image_name: 'venkyvn/order-service'
+      version: 'latest'
