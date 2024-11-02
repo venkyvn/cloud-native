@@ -20,6 +20,7 @@ spring:
           max-idle-time: 5s # idle time after which the communication channel will be closed
           max-life-time: 60s # time after which communication channel will be closed
       default-filters:
+        - SaveSession
         - name: RequestRateLimiter
           args:
             redis-rate-limiter:
@@ -60,6 +61,11 @@ spring:
     host: localhost
     port: 6379
     timeout: 1s
+  session:
+    store-type: redis
+    timeout: 10m
+    redis:
+      namespace: polar:edge
 
 
 resilience4j:
