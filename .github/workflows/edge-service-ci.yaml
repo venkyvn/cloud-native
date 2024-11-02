@@ -1,0 +1,21 @@
+name: Order Service Commit Stage
+
+on:
+  push:
+    paths:
+      - 'edge-service/**'
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+
+jobs:
+  edge-job:
+    name: Edge Job
+    uses: ./.github/workflows/common-ci.yaml
+    with:
+      service_dir: 'edge-service'
+      registry: 'ghcr.io'
+      image_name: 'venkyvn/edge-service'
+      version: 'latest'
