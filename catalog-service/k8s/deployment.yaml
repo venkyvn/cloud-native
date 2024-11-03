@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: catalog-service
-          image: ghcr.io/venkyvn/catalog-service:latest
+          image: catalog-service
           imagePullPolicy: IfNotPresent
           lifecycle:
             preStop: # make k8s wait 5 secs before sending SIGTERM signal to the pod

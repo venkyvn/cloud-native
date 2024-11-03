@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: polar-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - http: # ingress rule for http traffic
+        paths:
+          - path: / # default rule for all requests
+            pathType: Prefix
+            backend:
+              service:
+                name: edge-service #service names object where traffic should be forwarded
+                port:
+                  number: 80
