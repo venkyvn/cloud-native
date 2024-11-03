@@ -1,0 +1,21 @@
+name: Order Service Commit Stage
+
+on:
+  push:
+    paths:
+      - 'config-service/**'
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+
+jobs:
+  config-service-job:
+    name: Order Job
+    uses: ./.github/workflows/common-ci.yaml
+    with:
+      service_dir: 'config-service'
+      registry: 'ghcr.io'
+      image_name: 'venkyvn/config-service'
+      version: 'latest'
