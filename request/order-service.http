@@ -1,0 +1,11 @@
+###
+GET http://127.0.0.1/orders
+
+###
+POST http://127.0.0.1/orders
+Content-Type: application/json
+
+{
+  "isbn": "1234567892",
+  "quantity": 3
+}
