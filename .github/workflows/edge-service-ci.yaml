@@ -11,8 +11,8 @@ permissions:
   security-events: write
 
 jobs:
-  edge-job:
-    name: Edge Job
+  edge-service-job:
+    name: Edge Service Job
     uses: ./.github/workflows/common-ci.yaml
     with:
       service_dir: 'edge-service'

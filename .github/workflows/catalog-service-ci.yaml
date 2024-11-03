@@ -11,8 +11,8 @@ permissions:
   security-events: write
 
 jobs:
-  catalog-job:
-    name: Catalog Job
+  catalog-service-job:
+    name: Catalog Service Job
     uses: ./.github/workflows/common-ci.yaml
     with:
       service_dir: 'catalog-service'

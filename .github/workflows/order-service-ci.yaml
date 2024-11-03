@@ -11,8 +11,8 @@ permissions:
   security-events: write
 
 jobs:
-  order-job:
-    name: Order Job
+  order-service-job:
+    name: Order Service Job
     uses: ./.github/workflows/common-ci.yaml
     with:
       service_dir: 'order-service'

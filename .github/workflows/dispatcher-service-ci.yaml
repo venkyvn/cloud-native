@@ -3,7 +3,7 @@ name: Order Service Commit Stage
 on:
   push:
     paths:
-      - 'config-service/**'
+      - 'dispatcher-service/**'
 
 permissions:
   contents: read
@@ -11,11 +11,11 @@ permissions:
   security-events: write
 
 jobs:
-  config-service-job:
-    name: Config Service Job
+  dispatcher-service-job:
+    name: Dispatcher Service Job
     uses: ./.github/workflows/common-ci.yaml
     with:
-      service_dir: 'config-service'
+      service_dir: 'dispatcher-service'
       registry: 'ghcr.io'
-      image_name: 'venkyvn/config-service'
+      image_name: 'venkyvn/dispatcher-service'
       version: 'latest'
