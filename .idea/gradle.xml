@@ -21,6 +21,14 @@
         </option>
       </GradleProjectSettings>
       <GradleProjectSettings>
+        <option name="externalProjectPath" value="$PROJECT_DIR$/dispatcher-service" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$/dispatcher-service" />
+          </set>
+        </option>
+      </GradleProjectSettings>
+      <GradleProjectSettings>
         <option name="externalProjectPath" value="$PROJECT_DIR$/edge-service" />
         <option name="modules">
           <set>
