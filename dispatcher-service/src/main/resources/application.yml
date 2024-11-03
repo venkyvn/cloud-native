@@ -4,4 +4,7 @@ server:
 spring:
   application:
     name: dispatcher-service
+  cloud:
+    function:
+      definition: pack|label # pipe (|) operator to compose function together in a data flow. Using (;) if you need define multiple function
 
