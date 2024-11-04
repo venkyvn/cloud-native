@@ -7,4 +7,16 @@ spring:
   cloud:
     function:
       definition: pack|label # pipe (|) operator to compose function together in a data flow. Using (;) if you need define multiple function
-
+    stream:
+      bindings:
+        packlabel-in-0: # input binding
+          destination: order-accepted # actual name at the broker that the binder bind to
+          group: ${spring.application.name}
+        packlabel-out-0: # output binding
+          destination: order-dispatched
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: user
+    password: password
+    connection-timeout: 5s

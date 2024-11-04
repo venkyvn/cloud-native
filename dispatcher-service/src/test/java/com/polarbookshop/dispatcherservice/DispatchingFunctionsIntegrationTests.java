@@ -6,10 +6,9 @@ import org.springframework.cloud.function.context.FunctionCatalog;
 import org.springframework.cloud.function.context.test.FunctionalSpringBootTest;
 import reactor.core.publisher.Flux;
 import reactor.test.StepVerifier;
+import static org.assertj.core.api.Assertions.assertThat;
 
 import java.util.function.Function;
-
-import static org.assertj.core.api.Assertions.assertThat;
 
 @FunctionalSpringBootTest
 public class DispatchingFunctionsIntegrationTests {
@@ -33,6 +32,7 @@ public class DispatchingFunctionsIntegrationTests {
                 .verifyComplete();
     }
 
+
     @Test
     void packAndLabelOrder() {
         Function<OrderAcceptedMessage, Flux<OrderDispatchedMessage>>
@@ -43,6 +43,5 @@ public class DispatchingFunctionsIntegrationTests {
                         orderDispatchedMessage -> orderDispatchedMessage.equals(new OrderDispatchedMessage(orderId))
                 )
                 .verifyComplete();
-
     }
 }
