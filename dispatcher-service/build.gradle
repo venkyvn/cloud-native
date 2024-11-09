@@ -20,6 +20,7 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter'
     implementation 'org.springframework.cloud:spring-cloud-function-context'
     implementation 'org.springframework.cloud:spring-cloud-stream-binder-rabbit'
+    implementation 'org.springframework.cloud:spring-cloud-starter-config'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'io.projectreactor:reactor-test'
@@ -27,12 +28,10 @@ dependencies {
         artifact {
             name = "spring-cloud-stream"
             extension = "jar"
-            type ="test-jar"
+            type = "test-jar"
             classifier = "test-binder"
         }
     }
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
 }
 
 dependencyManagement {
@@ -42,9 +41,10 @@ dependencyManagement {
 }
 
 bootBuildImage {
-    builder = "docker.io/paketobuildpacks/builder-jammy-base"
-    imageName = "${project.name}"
+    builder = "gcr.io/paketo-buildpacks/builder:base"
     environment = ["BP_JVM_VERSION": "17"]
+    buildpacks = ["gcr.io/paketo-buildpacks/java"]
+    imageName = "${project.name}"
 
     docker {
         publishRegistry {
