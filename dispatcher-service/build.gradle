@@ -41,10 +41,11 @@ dependencyManagement {
 }
 
 bootBuildImage {
-    builder = "gcr.io/paketo-buildpacks/builder:base"
-    environment = ["BP_JVM_VERSION": "17"]
-    buildpacks = ["gcr.io/paketo-buildpacks/java"]
+    builder = "docker.io/paketobuildpacks/builder-jammy-base"
     imageName = "${project.name}"
+    environment = ["BP_JVM_VERSION": "17"]
+//    builder = "gcr.io/paketo-buildpacks/builder:base"
+//    buildpacks = ["gcr.io/paketo-buildpacks/java"]
 
     docker {
         publishRegistry {
