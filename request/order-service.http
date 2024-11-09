@@ -9,3 +9,69 @@ Content-Type: application/json
   "isbn": "1234567892",
   "quantity": 3
 }
+
+
+### entry point:
+POST http://127.0.0.1/books
+Content-Type: application/json
+
+{
+  "isbn": "1234567894",
+  "author": "Vuong Tran",
+  "title": "Vuong Book",
+  "price": 11.1,
+  "publisher": "Vuong publisher"
+}
+
+
+### order book
+POST http://127.0.0.1/orders
+Content-Type: application/json
+
+{
+  "isbn": "1234567893",
+  "quantity": 2
+}
+
+### verify
+GET http://127.0.0.1/orders
+
+
+###
+POST http://localhost:9002/orders
+Content-Type: application/json
+
+{
+  "isbn": "1234567894",
+  "quantity": 2
+}
+
+
+
+
+### entry point:
+POST localhost:9001/books
+Content-Type: application/json
+
+{
+  "isbn": "1234567894",
+  "author": "Vuong Tran",
+  "title": "Vuong Book",
+  "price": 11.1,
+  "publisher": "Vuong publisher"
+}
+
+### order book
+POST localhost:9002/orders
+Content-Type: application/json
+
+{
+  "isbn": "1234567894",
+  "quantity": 2
+}
+
+
+###
+
+GET localhost:9002/orders
+
